@@ -10,6 +10,13 @@ leaking API credentials, or setting up a deliberately insecure instance. Oh no.
 That's where this image comes in. It's an all-in-one docker container meant to
 act as a sidecar to your test environment.
 
+## Credentials
+
+The API key for an admin user is `testmispapikeytestmispapikeytestmispapik`
+
+I apologise for it being so long but it has to be 40 alphanumeric for MISP to pick
+it up as valid
+
 ## Usage
 
 ### Gitlab
@@ -17,7 +24,19 @@ act as a sidecar to your test environment.
 ```yaml
 test:
   services:
-  - koroshitekure/misp-testable 
+  - floatingghost/misp-testable 
 ```
 
 ### Travis
+
+```yaml
+services:
+- floatingghost/misp-testable
+```
+
+## Disclaimer
+
+I shouldn't even need to include one, but let's be safe
+
+This is a deliberately insecure image for use within CI/CD pipelines and other
+integration-test environments ONLY, do *not* use it for anything permanent.
