@@ -1,0 +1,1 @@
+INSERT INTO users(org_id, server_id, role_id, authkey, email, termsaccepted, disabled, password, last_login, current_login) VALUES (1, 0, 1, 'testmispapikeytestmispapikeytestmispapik', 'test@test.com', 1, 0, 'totally a password', 0, 1549897515);
