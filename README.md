@@ -31,7 +31,11 @@ test:
 
 ```yaml
 services:
-- floatingghost/misp-testable:v2.4.102
+  - docker
+
+before_install:
+  - docker pull floatingghost/misp-testable:v2.4.102
+  - docker run -d -p 80:80 floatingghost/misp-testable:v2.4.102
 ```
 
 ## Disclaimer
