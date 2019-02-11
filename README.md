@@ -24,14 +24,14 @@ it up as valid
 ```yaml
 test:
   services:
-  - floatingghost/misp-testable 
+  - floatingghost/misp-testable:v2.4.102
 ```
 
 ### Travis
 
 ```yaml
 services:
-- floatingghost/misp-testable
+- floatingghost/misp-testable:v2.4.102
 ```
 
 ## Disclaimer
