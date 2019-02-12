@@ -19,6 +19,8 @@ it up as valid
 
 ## Usage
 
+A full example of using this in Gitlab and Travis is available in [MISPex](https://github.com/FloatingGhost/mispex)
+
 ### Gitlab
 
 ```yaml
