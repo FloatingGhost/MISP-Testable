@@ -4,23 +4,18 @@ MAINTAINER Hannah Ward <hannah@coffee-and-dreams.uk>
 
 # Install core components
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y && apt-get clean
-RUN apt-get install -y software-properties-common locales
+RUN apt-get update && apt-get dist-upgrade -y && apt-get autoremove -y && apt-get clean &&  apt-get install -y software-properties-common locales
 
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 
 RUN add-apt-repository -y ppa:ondrej/php && apt-get update
-RUN apt-get install -y curl gcc git make python openssl redis-server sudo vim zip mariadb-client mariadb-server expect libapache2-mod-php php7.2 php7.2-cli php-crypt-gpg php7.2-dev php7.2-json php7.2-mysql php7.2-opcache php7.2-readline php7.2-redis php7.2-xml php-pear pkg-config libbson-1.0 libmongoc-1.0-0 php-xml php-dev python-dev python-pip libxml2-dev libxslt1-dev zlib1g-dev python-setuptools libfuzzy-dev supervisor
+RUN apt-get install -y curl gcc git make python openssl redis-server sudo vim zip mariadb-client mariadb-server expect libapache2-mod-php php7.2 php7.2-cli php-crypt-gpg php7.2-dev php7.2-json php7.2-mysql php7.2-opcache php7.2-readline php7.2-redis php7.2-xml php-pear pkg-config libbson-1.0 libmongoc-1.0-0 php-xml php-dev python-dev python-pip libxml2-dev libxslt1-dev zlib1g-dev python-setuptools libfuzzy-dev supervisor apache2 apache2-doc apache2-utils
 
 ADD mysql_setup.sh /mysql_setup.sh
-RUN service mysql start && /bin/sh /mysql_setup.sh
-RUN rm /mysql_setup.sh
+RUN service mysql start && /bin/sh /mysql_setup.sh ** rm /mysql_setup.sh
 
-# Apache
-RUN apt-get install -y apache2 apache2-doc apache2-utils
-RUN a2dismod status
-RUN a2dissite 000-default
+RUN a2dismod status && a2dissite 000-default
 
 # Fix php.ini with recommended settings
 RUN sed -i "s/max_execution_time = 30/max_execution_time = 300/" /etc/php/7.2/apache2/php.ini
@@ -56,8 +51,8 @@ WORKDIR /var/www/MISP
 RUN git submodule init
 RUN git submodule update
 WORKDIR /var/www/MISP/app
-RUN php composer.phar config vendor-dir Vendor
-RUN php composer.phar install --ignore-platform-reqs
+RUN php7.2 composer.phar config vendor-dir Vendor
+RUN php7.2 composer.phar install --ignore-platform-reqs
 USER root
 RUN phpenmod redis
 USER www-data
